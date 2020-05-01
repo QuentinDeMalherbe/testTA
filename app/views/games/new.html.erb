@@ -1,0 +1,22 @@
+
+<div class="container">
+  <h1>Fais le meilleur score en  5 partie</h1>
+  <p>Trouve les mots les plus long possible dans les 5 parties qui te sont proposé.</p>
+  <p>Chaque lettre compte 1 points, arrivera tu à faire 50 points? </p>
+
+  <% if !user_signed_in? %>
+  <div class= 'home-container'>
+    <h2>connecte-toi ou inscris-toi !! </h2>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+      <%= link_to "Sign_up", new_user_registration_path, class: "btn btn-primary" %>
+     </ul>
+  </div>
+  <% else %>
+    <div class= 'home-container'>
+     <h2>lance une partie</h2>
+      <%= simple_form_for(@game) do |f| %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
