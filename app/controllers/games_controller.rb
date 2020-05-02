@@ -16,6 +16,7 @@ class GamesController < ApplicationController
       redirect_to game_path(@game)
     else
       redirect_to root_path
+
     end
   end
 end
