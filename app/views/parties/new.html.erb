@@ -1,9 +1,10 @@
 <div class="container">
+
   <table>
         <tbody>
           <tr>
             <td> les lettres : </td>
-            <% @party.random_array.each do |letter| %>
+            <% @party.ten_letters_list.split("").each do |letter| %>
               <td><%= letter %></td>
             <% end %>
           </tr>
@@ -11,9 +12,7 @@
   </table>
   <%= simple_form_for [ @game, @party ] do |f| %>
   <%= f.input :word %>
-  <%= f.input :ten_letters_list %>
-  <%= f.input :available %>
-  <%= f.input :score %>
+  <%= f.input :ten_letters_list, :as => :hidden, input_html: {value: @party.ten_letters_list }%>
   <%= f.submit "Submit word", class: "btn btn-primary" %>
 <% end %>
 </div>

@@ -1,6 +1,7 @@
 class Party < ApplicationRecord
   belongs_to :game
   has_many :solutions
+  validates :word, presence: true
 
   def self.dictionnaire
     dico = []
@@ -10,12 +11,14 @@ class Party < ApplicationRecord
     return dico # probleme avec les accents
   end
 
+  DICTIONNAIRE = dictionnaire
+
   # création des 10 lettres en tableau
   def random_array
-    @letters = []
-    5.times {  @letters << ['A','E','Y', 'U', 'I', 'O'].sample }
-    5.times {  @letters << ('A'..'Z').to_a.difference(['A','E','Y', 'U', 'I', 'O']) .sample }
-    return @letters
+    letters = []
+    5.times {  letters << ['A','E','Y', 'U', 'I', 'O'].sample }
+    5.times {  letters << ('A'..'Z').to_a.difference(['A','E','Y', 'U', 'I', 'O']) .sample }
+    return letters
   end
 
   #  trouver les meilleur les solutions avec les lettres
@@ -29,8 +32,8 @@ class Party < ApplicationRecord
   end
 
   #  verifie si le mot existe
-  def verifier_le_mot(word)
-    if word != '' && self.dictionnaire.include?(word)
+  def avalaible?
+    if ((word != '') && (DICTIONNAIRE.include?(word)))
       return true
     else
       return false
